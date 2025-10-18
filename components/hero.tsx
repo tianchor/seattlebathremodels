@@ -28,7 +28,7 @@ export function Hero() {
           className="w-full h-full"
         >
           <img
-            src="/images/bathroom-design-15.jpg"
+            src="/images/bathroom-design-5.jpg"
             alt="Luxury bathroom remodel"
             className="w-full h-full object-cover"
           />
