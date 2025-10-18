@@ -130,7 +130,7 @@ export function Hero() {
                 className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-primary-foreground text-base md:text-lg px-8 py-7 rounded-xl font-bold shadow-2xl shadow-primary/50 hover:shadow-primary/70 transition-all group"
               >
                 <a href="https://clienthub.getjobber.com/booking/eada2ae7-fd52-442f-83bd-e9d7e03ed2dd/" target="_blank" rel="noopener noreferrer">
-                  BOOK A QUOTE NOW
+                  Book a quote now
                   <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                 </a>
               </Button>
