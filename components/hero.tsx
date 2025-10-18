@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Phone, CheckCircle2, Star } from "lucide-react";
+import { ArrowRight, CheckCircle2, Star } from "lucide-react";
 import { motion } from "framer-motion";
 
 export function Hero() {
@@ -28,7 +28,7 @@ export function Hero() {
           className="w-full h-full"
         >
           <img
-            src="/images/bathroom-design-5.jpg"
+            src="/images/bathroom-design-05.jpg"
             alt="Luxury bathroom remodel"
             className="w-full h-full object-cover"
           />
@@ -126,14 +126,16 @@ export function Hero() {
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
               <Button
                 size="lg"
+                asChild
                 className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-primary-foreground text-base md:text-lg px-8 py-7 rounded-xl font-bold shadow-2xl shadow-primary/50 hover:shadow-primary/70 transition-all group"
               >
-                <Phone className="w-5 h-5 mr-2" />
-                Call (425) 357-7867
-                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                <a href="https://clienthub.getjobber.com/booking/eada2ae7-fd52-442f-83bd-e9d7e03ed2dd/" target="_blank" rel="noopener noreferrer">
+                  BOOK A QUOTE NOW
+                  <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                </a>
               </Button>
             </motion.div>
-            
+
           </motion.div>
 
           {/* Stats Section */}

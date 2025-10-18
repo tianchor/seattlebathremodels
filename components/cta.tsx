@@ -18,7 +18,7 @@ export function CTA() {
       <div className="absolute inset-0 z-0">
         <div
           className="w-full h-full bg-cover bg-center"
-          style={{ backgroundImage: "url('/images/bathroom-design-14.jpg')" }}
+          style={{ backgroundImage: "url('/images/bathroom-design-10.jpg')" }}
         />
         {/* Dark gradient overlay for better text contrast */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/80" />
@@ -114,9 +114,11 @@ export function CTA() {
                 </Button>
               </motion.div>
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
-                <Button size="lg" className="gap-2 text-base px-8 bg-primary hover:bg-primary/90 text-white font-bold shadow-2xl shadow-primary/50">
-                  Schedule Consultation
-                  <ArrowRight className="w-5 h-5" />
+                <Button size="lg" asChild className="gap-2 text-base px-8 bg-primary hover:bg-primary/90 text-white font-bold shadow-2xl shadow-primary/50">
+                  <a href="https://clienthub.getjobber.com/booking/eada2ae7-fd52-442f-83bd-e9d7e03ed2dd/" target="_blank" rel="noopener noreferrer">
+                    Schedule Consultation
+                    <ArrowRight className="w-5 h-5" />
+                  </a>
                 </Button>
               </motion.div>
             </motion.div>
