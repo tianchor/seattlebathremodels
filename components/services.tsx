@@ -6,6 +6,7 @@ import { Bath, Droplets, Accessibility, Sparkles, ArrowRight } from "lucide-reac
 import { motion } from "framer-motion"
 import { useInView } from "framer-motion"
 import { useRef } from "react"
+import Image from "next/image"
 
 const services = [
   {
@@ -13,24 +14,28 @@ const services = [
     title: "Walk-In Tubs",
     description: "Safe, accessible bathing solutions with therapeutic features for comfort and independence.",
     features: ["Low threshold entry", "Built-in seating", "Hydrotherapy jets", "Quick drain system"],
+    image: "/images/bathroom-design-07.jpg",
   },
   {
     icon: Droplets,
     title: "Accessible Showers",
     description: "Barrier-free shower systems designed for safety without compromising on style.",
     features: ["Zero-threshold entry", "Non-slip flooring", "Grab bars", "Adjustable fixtures"],
+    image: "/images/bathroom-design-11.jpg",
   },
   {
     icon: Sparkles,
     title: "Full Bathroom Remodels",
     description: "Complete transformations that maximize space, functionality, and aesthetic appeal.",
     features: ["Custom design", "Quality materials", "Modern fixtures", "Expert installation"],
+    image: "/images/bathroom-design-09.jpg",
   },
   {
     icon: Accessibility,
     title: "ADA Compliance",
     description: "Modifications that meet accessibility standards while maintaining beautiful design.",
     features: ["Code compliant", "Universal design", "Safety features", "Future-proof solutions"],
+    image: "/images/bathroom-design-14.jpg",
   },
 ]
 
@@ -48,8 +53,18 @@ function ServiceCard({ service, index }: { service: (typeof services)[0]; index:
       whileHover={{ y: -8 }}
       className="h-full"
     >
-      <Card className="border-2 border-border/50 hover:border-primary/50 hover:shadow-2xl transition-all duration-300 h-full group bg-card/50 backdrop-blur-sm">
-        <CardContent className="p-6 sm:p-8">
+      <Card className="border-2 border-border/50 hover:border-primary/50 hover:shadow-2xl transition-all duration-300 h-full group bg-card/50 backdrop-blur-sm overflow-hidden relative">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src={service.image}
+            alt={service.title}
+            fill
+            className="object-cover opacity-30"
+            sizes="(max-width: 768px) 100vw, 50vw"
+          />
+          <div className="absolute inset-0 bg-white/60" />
+        </div>
+        <CardContent className="p-6 sm:p-8 relative z-10">
           <motion.div
             initial={{ scale: 0, rotate: -180 }}
             animate={isInView ? { scale: 1, rotate: 0 } : { scale: 0, rotate: -180 }}
