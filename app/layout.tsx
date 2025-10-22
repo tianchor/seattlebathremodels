@@ -3,6 +3,7 @@ import type { Metadata } from "next"
 import { GeistSans } from "geist/font/sans"
 import { Analytics } from "@vercel/analytics/next"
 import { Suspense } from "react"
+import { GoogleAnalytics } from "@/components/google-analytics"
 import "./globals.css"
 
 export const metadata: Metadata = {
@@ -19,6 +20,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <GoogleAnalytics />
+      </head>
       <body className={`font-sans ${GeistSans.variable} antialiased`}>
         <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
         <Analytics />
