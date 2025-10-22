@@ -33,8 +33,8 @@ export default function ContactPage() {
     {
       icon: Phone,
       title: "Phone",
-      content: "(425) 357-7867",
-      link: "tel:4253577867"
+      content: "(425) 345-5194",
+      link: "tel:4253455194"
     },
     {
       icon: Mail,

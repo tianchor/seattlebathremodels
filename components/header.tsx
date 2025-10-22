@@ -92,9 +92,9 @@ export function Header() {
                 size="sm"
                 className="bg-primary hover:bg-primary/90 text-white gap-2 rounded-full px-4 sm:px-5 md:px-7 py-5 sm:py-6 text-xs sm:text-sm font-bold shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 transition-all"
               >
-                <a href="tel:4253577867" className="flex items-center gap-2">
+                <a href="tel:4253455194" className="flex items-center gap-2">
                   <Phone className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
-                  <span className="hidden sm:inline">(425) 357-7867</span>
+                  <span className="hidden sm:inline">(425) 345-5194</span>
                   <span className="sm:hidden">Call Now</span>
                 </a>
               </Button>

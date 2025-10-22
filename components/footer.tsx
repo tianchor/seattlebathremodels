@@ -37,8 +37,8 @@ export function Footer() {
             <div>
               <h3 className="font-bold text-lg mb-4">Contact Us</h3>
               <div className="space-y-3">
-                <a href="tel:4253577867" className="block text-base font-bold text-primary hover:text-primary/80 transition-colors">
-                  (425) 357-7867
+                <a href="tel:4253455194" className="block text-base font-bold text-primary hover:text-primary/80 transition-colors">
+                  (425) 345-5194
                 </a>
                 <a href="mailto:info@seattlebathremodels.com" className="block text-sm text-muted-foreground hover:text-primary transition-colors">
                   info@seattlebathremodels.com

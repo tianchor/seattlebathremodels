@@ -110,7 +110,7 @@ export function CTA() {
                   className="gap-2 text-base px-8 bg-white/10 backdrop-blur-md border-white/20 text-white hover:bg-white hover:text-accent font-semibold"
                 >
                   <Phone className="w-5 h-5" />
-                  (425) 357-7867
+                  (425) 345-5194
                 </Button>
               </motion.div>
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
