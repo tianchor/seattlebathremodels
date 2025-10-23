@@ -96,9 +96,11 @@ function ServiceCard({ service, index }: { service: (typeof services)[0]; index:
             whileHover={{ x: 5 }}
             transition={{ duration: 0.2 }}
           >
-            <Button variant="ghost" className="gap-2 p-0 h-auto text-primary hover:text-primary/80 font-semibold group-hover:gap-3 transition-all">
-              Learn More
-              <ArrowRight className="w-4 h-4" />
+            <Button variant="ghost" asChild className="gap-2 p-0 h-auto text-primary hover:text-primary/80 font-semibold group-hover:gap-3 transition-all">
+              <a href="/contact">
+                Learn More
+                <ArrowRight className="w-4 h-4" />
+              </a>
             </Button>
           </motion.div>
         </CardContent>
