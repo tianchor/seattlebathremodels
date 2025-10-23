@@ -1,44 +1,51 @@
 "use client"
 
 import { Card } from "@/components/ui/card"
-import { motion } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 import { useInView } from "framer-motion"
-import { useRef } from "react"
+import { useRef, useState, useEffect, useCallback } from "react"
+import { ChevronLeft, ChevronRight, X } from "lucide-react"
 
 const projects = [
   {
     title: "Modern Walk-In Shower",
     category: "Accessible Shower",
     image: "/images/bathroom-design-01.jpg",
+    description: "Contemporary design with frameless glass and premium tile work"
   },
   {
     title: "Luxury Walk-In Tub",
     category: "Walk-In Tub",
     image: "/images/bathroom-design-02.jpg",
+    description: "Safe and stylish bathing solution with therapeutic jets"
   },
   {
     title: "Contemporary Full Remodel",
     category: "Full Remodel",
     image: "/images/bathroom-design-03.jpg",
+    description: "Complete transformation with floating vanity and modern fixtures"
   },
   {
     title: "Spa-Inspired Retreat",
     category: "Full Remodel",
     image: "/images/bathroom-design-04.jpg",
+    description: "Natural stone accents create a serene spa atmosphere"
   },
   {
     title: "Accessible Master Bath",
     category: "ADA Compliance",
     image: "/images/bathroom-design-05.jpg",
+    description: "Barrier-free design with grab bars and wide doorways"
   },
   {
     title: "Classic Elegance",
     category: "Full Remodel",
     image: "/images/bathroom-design-06.jpg",
+    description: "Timeless design with marble countertops and traditional fixtures"
   },
 ]
 
-function ProjectCard({ project, index }: { project: (typeof projects)[0]; index: number }) {
+function ProjectCard({ project, index, onClick }: { project: (typeof projects)[0]; index: number; onClick: () => void }) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
@@ -49,6 +56,7 @@ function ProjectCard({ project, index }: { project: (typeof projects)[0]; index:
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
       transition={{ duration: 0.5, delay: index * 0.08 }}
       className="group"
+      onClick={onClick}
     >
       <Card className="overflow-hidden cursor-pointer border-0 transition-all duration-300 hover:shadow-2xl p-0">
         <motion.div
@@ -106,56 +114,164 @@ function ProjectCard({ project, index }: { project: (typeof projects)[0]; index:
 export function Gallery() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
+  const [lightboxOpen, setLightboxOpen] = useState(false)
+  const [lightboxIndex, setLightboxIndex] = useState(0)
+
+  const openLightbox = useCallback((index: number) => {
+    setLightboxIndex(index)
+    setLightboxOpen(true)
+  }, [])
+
+  const closeLightbox = useCallback(() => {
+    setLightboxOpen(false)
+  }, [])
+
+  const lightboxNext = useCallback(() => {
+    setLightboxIndex((prev) => (prev + 1) % projects.length)
+  }, [])
+
+  const lightboxPrevious = useCallback(() => {
+    setLightboxIndex((prev) => (prev - 1 + projects.length) % projects.length)
+  }, [])
+
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (lightboxOpen) {
+        if (e.key === "ArrowLeft") lightboxPrevious()
+        if (e.key === "ArrowRight") lightboxNext()
+        if (e.key === "Escape") closeLightbox()
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown)
+    return () => window.removeEventListener("keydown", handleKeyDown)
+  }, [lightboxOpen, lightboxPrevious, lightboxNext, closeLightbox])
 
   return (
-    <section id="gallery" className="py-16 sm:py-20 md:py-32 bg-gradient-to-b from-background to-secondary/20">
-      <div className="container mx-auto px-4 sm:px-6">
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.6 }}
-          className="max-w-3xl mx-auto text-center mb-12 sm:mb-16"
-        >
+    <>
+      <section id="gallery" className="py-16 sm:py-20 md:py-32 bg-gradient-to-b from-background to-secondary/20">
+        <div className="container mx-auto px-4 sm:px-6">
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
-            transition={{ duration: 0.5 }}
-            className="inline-block bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-semibold mb-4"
+            ref={ref}
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+            transition={{ duration: 0.6 }}
+            className="max-w-3xl mx-auto text-center mb-12 sm:mb-16"
           >
-            Our Work
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
+              transition={{ duration: 0.5 }}
+              className="inline-block bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-semibold mb-4"
+            >
+              Our Work
+            </motion.div>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 text-balance text-accent">
+              Recent Projects
+            </h2>
+            <p className="text-base sm:text-lg text-muted-foreground text-pretty leading-relaxed">
+              Explore our portfolio of stunning bathroom transformations across the Seattle area.
+            </p>
           </motion.div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 text-balance text-accent">
-            Recent Projects
-          </h2>
-          <p className="text-base sm:text-lg text-muted-foreground text-pretty leading-relaxed">
-            Explore our portfolio of stunning bathroom transformations across the Seattle area.
-          </p>
-        </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 max-w-6xl mx-auto">
-          {projects.map((project, index) => (
-            <ProjectCard key={index} project={project} index={index} />
-          ))}
-        </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 max-w-6xl mx-auto">
+            {projects.map((project, index) => (
+              <ProjectCard key={index} project={project} index={index} onClick={() => openLightbox(index)} />
+            ))}
+          </div>
 
-        {/* CTA Button */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
-          className="text-center mt-12"
-        >
-          <motion.a
-            href="/portfolio"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="inline-flex items-center gap-2 bg-transparent border-2 border-accent text-accent hover:bg-accent hover:text-white px-6 py-3 rounded-lg font-semibold transition-colors"
+          {/* CTA Button */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.6, delay: 0.8 }}
+            className="text-center mt-12"
           >
-            View Full Portfolio
-          </motion.a>
-        </motion.div>
-      </div>
-    </section>
+            <motion.a
+              href="/portfolio"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="inline-flex items-center gap-2 bg-transparent border-2 border-accent text-accent hover:bg-accent hover:text-white px-6 py-3 rounded-lg font-semibold transition-colors"
+            >
+              View Full Portfolio
+            </motion.a>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Lightbox Modal */}
+      <AnimatePresence>
+        {lightboxOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-sm flex items-center justify-center p-4"
+            onClick={closeLightbox}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="relative max-w-7xl w-full h-full flex items-center justify-center"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="relative w-full max-h-[85vh] flex items-center justify-center">
+                <img
+                  src={projects[lightboxIndex].image}
+                  alt={projects[lightboxIndex].title}
+                  className="max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl"
+                />
+
+                {/* Lightbox Info */}
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent p-6 text-white rounded-b-lg">
+                  <div className="inline-block bg-primary text-primary-foreground px-3 py-1 rounded-full text-xs font-semibold mb-2">
+                    {projects[lightboxIndex].category}
+                  </div>
+                  <h3 className="text-2xl font-bold mb-2">
+                    {projects[lightboxIndex].title}
+                  </h3>
+                  <p className="text-white/90">
+                    {projects[lightboxIndex].description}
+                  </p>
+                </div>
+
+                {/* Close Button */}
+                <button
+                  onClick={closeLightbox}
+                  className="absolute top-4 right-4 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full backdrop-blur-sm transition-all hover:scale-110 z-10"
+                  aria-label="Close lightbox"
+                >
+                  <X className="w-6 h-6" />
+                </button>
+
+                {/* Navigation */}
+                <button
+                  onClick={lightboxPrevious}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-4 rounded-full backdrop-blur-sm transition-all hover:scale-110 z-10"
+                  aria-label="Previous image"
+                >
+                  <ChevronLeft className="w-8 h-8" />
+                </button>
+                <button
+                  onClick={lightboxNext}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-4 rounded-full backdrop-blur-sm transition-all hover:scale-110 z-10"
+                  aria-label="Next image"
+                >
+                  <ChevronRight className="w-8 h-8" />
+                </button>
+
+                {/* Image Counter */}
+                <div className="absolute top-4 left-4 bg-black/50 text-white px-4 py-2 rounded-full backdrop-blur-sm text-sm font-semibold z-10">
+                  {lightboxIndex + 1} / {projects.length}
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   )
 }
