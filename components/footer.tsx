@@ -57,14 +57,6 @@ export function Footer() {
                     <p>Redmond, WA 98052</p>
                   </div>
                 </div>
-
-                <div>
-                  <h4 className="font-bold text-sm text-accent mb-2">Woodinville</h4>
-                  <div className="text-sm text-muted-foreground space-y-1">
-                    <p>19501 144th Ave NE, B-500</p>
-                    <p>Woodinville, WA</p>
-                  </div>
-                </div>
               </div>
             </div>
           </div>

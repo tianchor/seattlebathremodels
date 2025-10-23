@@ -106,11 +106,14 @@ export function CTA() {
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
                 <Button
                   size="lg"
+                  asChild
                   variant="outline"
                   className="gap-2 text-base px-8 bg-white/10 backdrop-blur-md border-white/20 text-white hover:bg-white hover:text-accent font-semibold"
                 >
-                  <Phone className="w-5 h-5" />
-                  (425) 345-5194
+                  <a href="tel:4253455194">
+                    <Phone className="w-5 h-5" />
+                    (425) 345-5194
+                  </a>
                 </Button>
               </motion.div>
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
@@ -130,10 +133,10 @@ export function CTA() {
               viewport={{ once: true }}
               className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-6 border-t border-white/20"
             >
-              <div className="flex items-center gap-2 text-sm text-white/90">
+              <a href="mailto:info@seattlebathremodels.com" className="flex items-center gap-2 text-sm text-white/90 hover:text-white transition-colors">
                 <Mail className="w-4 h-4" />
                 info@seattlebathremodels.com
-              </div>
+              </a>
             </motion.div>
           </CardContent>
         </Card>
