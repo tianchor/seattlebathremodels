@@ -11,6 +11,9 @@ export const metadata: Metadata = {
   description:
     "Transform your bathroom with Seattle's premier remodeling experts. Walk-in tubs, accessible showers, and complete bathroom renovations.",
   generator: "v0.app",
+  other: {
+    "facebook-domain-verification": "7p1b7osx6anegc7r2ek1493y22ytlw",
+  },
 }
 
 export default function RootLayout({
