@@ -4,6 +4,7 @@ import { GeistSans } from "geist/font/sans"
 import { Analytics } from "@vercel/analytics/next"
 import { Suspense } from "react"
 import { GoogleAnalytics } from "@/components/google-analytics"
+import { MetaPixel } from "@/components/meta-pixel"
 import "./globals.css"
 
 export const metadata: Metadata = {
@@ -25,6 +26,7 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <GoogleAnalytics />
+        <MetaPixel />
       </head>
       <body className={`font-sans ${GeistSans.variable} antialiased`}>
         <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
