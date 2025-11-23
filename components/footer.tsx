@@ -1,6 +1,21 @@
+"use client"
 import { Facebook, Instagram, Linkedin } from "lucide-react"
+import { useEffect, useState } from "react"
+import { Button } from "@/components/ui/button"
 
 export function Footer() {
+  const [showBanner, setShowBanner] = useState(false)
+
+  useEffect(() => {
+    const consentGiven = document.cookie.split(";").some((c) => c.trim().startsWith("cookie_consent=accepted"))
+    setShowBanner(!consentGiven)
+  }, [])
+
+  const acceptCookies = () => {
+    const oneYear = 60 * 60 * 24 * 365
+    document.cookie = `cookie_consent=accepted;max-age=${oneYear};path=/`
+    setShowBanner(false)
+  }
   return (
     <footer className="bg-secondary/30 border-t border-border py-12 md:py-16">
       <div className="container mx-auto px-4">
@@ -67,6 +82,18 @@ export function Footer() {
           </div>
         </div>
       </div>
+      {showBanner && (
+        <div className="fixed bottom-3 left-3 right-3 z-50">
+          <div className="bg-background border shadow-md rounded-lg p-3 md:p-4 flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-3">
+            <p className="text-xs md:text-sm leading-tight tracking-tight text-muted-foreground flex-1">
+              This site uses cookies to improve your experience.
+            </p>
+            <div className="flex gap-2 w-full md:w-auto">
+              <Button size="sm" onClick={acceptCookies} className="flex-1 md:flex-none">Accept</Button>
+            </div>
+          </div>
+        </div>
+      )}
     </footer>
   )
 }
